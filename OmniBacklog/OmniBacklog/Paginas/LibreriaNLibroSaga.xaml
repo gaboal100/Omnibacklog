@@ -1,0 +1,115 @@
+﻿<Window x:Class="OmniBacklog.Paginas.LibreriaNLibroSaga"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+          xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:OmniBacklog"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:sdl="http://schemas.sdl.com/xaml"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Añadir libros y sagas" Height="500" Width="1000" ResizeMode="NoResize">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.1*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="GridSagas" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="1.7*"/>
+                <RowDefinition Height="1.7*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label FontWeight="Bold" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Nueva saga</Label>
+            
+            <Label FontWeight="Bold" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">Saga padre:</Label>
+
+            <Label FontWeight="Bold" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">Saga (nueva):</Label>
+
+            <Label FontWeight="Bold" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">Numerado Saga:</Label>
+
+            <ComboBox Name="CBSagasS" Grid.Column="1" Grid.Row="1" Margin="10,10,10,10" SelectedValue="{Binding Path=SagaId}" IsTextSearchCaseSensitive="False" IsTextSearchEnabled="True"/>
+
+            <TextBox Grid.Row="2" Grid.Column="1" Controls:TextBoxHelper.Watermark="Nombre de la saga nueva"  Controls:TextBoxHelper.ClearTextButton="True" x:Name="TBSagaN" Foreground="DarkSlateGray" Text="{Binding Path=Nombre,Mode=TwoWay}" Margin="10,10,10,10"></TextBox>
+
+            <CheckBox x:Name="CheckPadre" Content="Principal" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" VerticalAlignment="Center" Checked="CheckPadre_Checked" Unchecked="CheckPadre_Unchecked"/>
+
+            <Controls:NumericUpDown x:Name="NUDNumeradoS" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Minimum="0" Value="{Binding Path=Numerado,Mode=TwoWay}" Margin="10,0,10,0"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,30">
+                <Button x:Name="AñadirSaga" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0" Click="AñadirSaga_Click">Añadir Saga</Button>
+
+                <Button x:Name="BorrarSaga" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0" Click="BorrarSaga_Click">Borrar</Button>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="GridLibros" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.05*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="1.7*"/>
+                <RowDefinition Height="1.7*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label FontWeight="Bold" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Nuevo libro</Label>
+            
+            <Label FontWeight="Bold" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">Saga padre:</Label>
+
+            <Label FontWeight="Bold" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">Título:</Label>
+
+            <Label FontWeight="Bold" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Content="Numerado Libro:"/>
+
+            <Label FontWeight="Bold" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">Géneros:</Label>
+
+            <Label FontWeight="Bold" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">Autores:</Label>
+
+            <ComboBox Name="CBSagasL" Grid.Column="1" Grid.Row="1" Margin="10,10,10,10" SelectedValue="{Binding Path=SagaId}" IsTextSearchCaseSensitive="False" IsTextSearchEnabled="True" />
+
+            <TextBox Grid.Row="2" Grid.Column="1" Controls:TextBoxHelper.Watermark="Nombre del nuevo libro"  Controls:TextBoxHelper.ClearTextButton="True" x:Name="TBTitulo" Foreground="DarkSlateGray" Text="{Binding Path=Titulo,Mode=TwoWay}" Margin="10,10,10,10"></TextBox>
+
+            <Controls:NumericUpDown x:Name="NUDNumerado" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Minimum="0" Value="{Binding Path=Numerado,Mode=TwoWay}" Margin="10,0,10,0"/>
+
+            <ListView Grid.Row="4" Grid.Column="1" x:Name="LVGeneros" SelectionMode="Multiple" SelectedValue="{Binding Path=Genero.GeneroId}" Margin="10,0,10,5" BorderBrush="Black" BorderThickness="1"></ListView>
+
+            <ListView Grid.Row="5" Grid.Column="1" x:Name="LVAutores" SelectionMode="Multiple" SelectedValue="{Binding Path=Autor.AutorId}" Margin="10,0,10,5" BorderBrush="Black" BorderThickness="1"></ListView>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <Button x:Name="AñadirLibro" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0" Click="AñadirLibro_Click">Añadir libro</Button>
+
+                <Button x:Name="Borrar" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0" Click="BorrarLibro_Click">Borrar</Button>
+            </StackPanel>
+        </Grid>
+        
+        
+
+        
+        
+
+    </Grid>
+</Window>

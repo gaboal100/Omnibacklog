@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "ea6b8180-9507-4e05-b367-23c3199d13a3": {
+      "ProjectGuid": "ea6b8180-9507-4e05-b367-23c3199d13a3",
+      "DisplayName": "OmniBacklog",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Archivos varios",
+      "ColorIndex": -1
+    },
+    "8a7b1af3-d73a-4268-8d55-072b880a03ef": {
+      "ProjectGuid": "8a7b1af3-d73a-4268-8d55-072b880a03ef",
+      "DisplayName": "OmniBacklogInstaller",
+      "ColorIndex": 1
+    },
+    "85e36d5a-1f0c-4121-84a8-52d3880ccb08": {
+      "ProjectGuid": "85e36d5a-1f0c-4121-84a8-52d3880ccb08",
+      "DisplayName": "OmniBacklogInstaller",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

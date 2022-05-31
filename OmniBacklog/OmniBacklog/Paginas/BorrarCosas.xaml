@@ -1,0 +1,149 @@
+﻿<Window x:Class="OmniBacklog.Paginas.BorrarCosas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:OmniBacklog" 
+        xmlns:DAL = "clr-namespace:OmniBacklog.DAL"
+        xmlns:MODEL = "clr-namespace:OmniBacklog.MODEL"
+        xmlns:pgs = "clr-namespace:OmniBacklog.Paginas"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}" 
+        Title="Eliminar y mover en masa" Height="750" Width="1150">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Line X1="575" X2="575" Y1="25" Y2="600" Stroke="Black" StrokeThickness="0.5" Grid.ColumnSpan="2"/>
+        <Grid x:Name="GridSagas">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition/>
+                <RowDefinition Height="0.2*"/>
+            </Grid.RowDefinitions>
+
+            <Label FontWeight="Bold" FontSize="20" Content="Sagas" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,10,0" />
+
+            <DataGrid Margin="10,10,10,10" x:Name="DGSagas" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" Background="White" Grid.Row="1" SelectionMode="Extended" BorderBrush="#CC000000" BorderThickness="1" SelectionChanged="DGSagas_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Path=SagaId}" Width="0.35*"/>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Path=Nombre}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Numerado" Binding="{Binding Path=Numerado}" Width="0.4*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Saga padre" Binding="{Binding Path=Saga1.Nombre}" Width="1*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.6*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BorrarSagas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" FontSize="16" Margin="10,30,10,30" Click="BorrarSagas_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background> Borrar
+                </Button>
+
+                <ComboBox Name="CBSagasS"  Margin="10,35,10,35" SelectedValue="{Binding Path=SagaId, Mode=TwoWay}" Grid.Column="1" SelectedIndex="0" FontSize="16" BorderBrush="Black" >
+                    <!--<ComboBoxItem Content="Saga padre"/>-->
+                </ComboBox>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="CSPadres" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="16" Click="CSPadres_Click" Margin="5,10,5,10">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                                <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Button.Background> Cambiar padre
+                    </Button>
+                    <Button x:Name="BSPadres" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" FontSize="16"  Margin="5,10,5,10" Click="BSPadres_Click" Content="Hacer principal">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                                <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </Grid>
+
+
+
+
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="GridLibros" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition/>
+                <RowDefinition Height="0.2*"/>
+            </Grid.RowDefinitions>
+
+            <Label FontWeight="Bold" FontSize="20" Content="Libros" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,10,0" />
+
+            <DataGrid Margin="10,10,10,10" x:Name="DGLibros" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" Background="White" Grid.Row="1" SelectionMode="Extended" BorderBrush="#CC000000" BorderThickness="1" SelectionChanged="DGLibros_SelectionChanged" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Path=LibroId}" Width="0.35*"/>
+                    <DataGridTextColumn Header="Título" Binding="{Binding Path=Titulo}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Numerado" Binding="{Binding Path=Numerado}" Width="0.4*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Saga" Binding="{Binding Path=Saga.Nombre}" Width="1*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.6*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BorrarLibros" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" FontSize="16" Margin="10,30,10,30" Click="BorrarLibros_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background> Borrar
+                </Button>
+
+                <ComboBox Name="CBSagasL"  Margin="10,35,10,35" SelectedValue="{Binding Path=SagaId, Mode=TwoWay}" Grid.Column="1" SelectedIndex="0" FontSize="16" BorderBrush="Black" >
+                    <!--<ComboBoxItem Content="Saga padre"/>-->
+                </ComboBox>
+
+                <Button x:Name="CLPadres" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2" FontSize="16" Margin="10,30,10,30" Click="CLPadres_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background> Cambiar padre
+                </Button>
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>

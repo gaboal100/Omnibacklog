@@ -1,0 +1,247 @@
+﻿<Page x:Class="OmniBacklog.Paginas.Libreria"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:OmniBacklog" 
+        xmlns:DAL = "clr-namespace:OmniBacklog.DAL"
+        xmlns:MODEL = "clr-namespace:OmniBacklog.MODEL"
+        xmlns:pgs = "clr-namespace:OmniBacklog.Paginas"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}" 
+        d:DesignHeight="784" d:DesignWidth="1200"
+        Title="Libreria">
+
+    <Page.Resources>
+        <pgs:Conversor x:Key="Conversor"/>
+    </Page.Resources>
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <RadioButton x:Name="RBLibro" Content="Buscar libro" HorizontalAlignment="Left" Margin="20,0,0,0" IsChecked="True"/>
+                    <RadioButton x:Name="RBSaga" Content="Buscar saga" Grid.Row="1" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+                </Grid>
+                <TextBox Grid.Column="1" Controls:TextBoxHelper.Watermark="Introduce nombre de saga o título del libro" Controls:TextBoxHelper.ClearTextButton="True" Background="#E7E9EC" BorderBrush="LightGray" x:Name="TBNombreBuscar" Foreground="DarkSlateGray" Text="{Binding Path=Titulo,Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+                <Button x:Name="BTBuscar" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2" FontSize="13" Click="BTBuscar_Click" Margin="10,0,10,0" Padding="10,6,10,6">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background> Buscar
+                </Button>
+            </Grid>
+            
+            <TreeView x:Name="TVSagaP" Background="White" BorderBrush="Black" BorderThickness="1" SelectedItemChanged="TVSagaP_SelectedItem" Grid.Row="1">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type MODEL:Saga}">
+                        <HierarchicalDataTemplate.ItemsSource>
+                            <MultiBinding Converter="{StaticResource Conversor}" ConverterParameter="Sagas, Libros">
+                                <Binding Path="Sagas" Mode="TwoWay"/>
+                                <Binding Path="Libros" Mode="TwoWay"/>
+                            </MultiBinding>
+                        </HierarchicalDataTemplate.ItemsSource>
+                        <TextBlock Text="{Binding Nombre, Mode=TwoWay}" FontWeight="DemiBold" FontSize="14"/>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type MODEL:Libro}">
+                        <TextBlock Text="{Binding Titulo, Mode=TwoWay}">
+                            <!--<TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Titulo}">
+                                            <Setter Property="Foreground" Value="Green"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>-->
+                        </TextBlock>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+        </Grid>
+
+        
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BTNew" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,20,20,20" Grid.Column="0" FontSize="16" Click="BTNew_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background> Añadir Libro/Saga
+                </Button>
+
+            <Button x:Name="BTElim" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,20,20,20" Grid.Column="2" FontSize="16" Click="BTElim_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                        <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                    </LinearGradientBrush>
+                </Button.Background> Eliminar y mover en masa
+            </Button>
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.RowSpan="2" x:Name="gridLibro"  Background="#E7E9EC">
+            <StackPanel  HorizontalAlignment="Center"  x:Name="stack_personal"  Background="#E7E9EC" >
+                <Label FontWeight="Bold" Margin="10" FontSize="16" Width="375" Content="Selección" />
+
+                <Label FontWeight="Bold" Background="#E7E9EC" Width="300">Título o nombre</Label>
+                <TextBox Controls:TextBoxHelper.Watermark="Título: máximo 50 caracteres"  Controls:TextBoxHelper.ClearTextButton="True" Background="White" BorderBrush="LightGray" x:Name="TBNombre" Foreground="DarkSlateGray" Width="300"></TextBox>
+                
+                <Label FontWeight="Bold" Background="#E7E9EC" Width="300">Saga padre</Label>
+                <StackPanel Orientation="Horizontal" Margin="10,0,10,0" Width="300">
+                    <ComboBox Name="CBSagas"  Margin="0,0,0,0" SelectedValue="{Binding Path=SagaId, Mode=TwoWay}" Width="200" SelectionChanged="CBSagas_SelectionChanged">
+                    </ComboBox>
+                    <CheckBox x:Name="CheckNinguno" Checked="Quitar" Unchecked="Dejar" Margin="10,0,0,0">Quitar</CheckBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Width="300">
+                    <Label FontWeight="Bold" Background="#E7E9EC" Margin="0,0,10,0" Content="Orden de lectura:"/>
+                    <mah:NumericUpDown Background="#E7E9EC" BorderBrush="LightGray" Name="TBNum" Foreground="DarkSlateGray" Value="{Binding Path=Numerado,Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center"></mah:NumericUpDown>
+
+                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label FontWeight="Bold" Background="#E7E9EC" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Géneros</Label>
+                    <ListView Grid.Row="1" Grid.Column="0" x:Name="LVGenerosT" SelectedValue="{Binding GeneroId}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="140" Height="210" SelectionMode="Multiple"></ListView>
+
+                    <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="2,0,2,0">
+                        <Button x:Name="AñadirGen" Grid.Column="1" FontSize="13" Margin="0,5,0,5" Click="AñadirGen_Click">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                                    <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Button.Background> Añadir->
+                        </Button>
+                        <Button x:Name="QuitarGen" Grid.Column="1" FontSize="13" Margin="0,5,0,5" Click="QuitarGen_Click">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                                    <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Button.Background> Quitar
+                        </Button>
+                    </StackPanel>
+                    
+                    <Label FontWeight="Bold" Background="#E7E9EC" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">Géneros del libro</Label>
+                    <ListView Grid.Row="1" Grid.Column="2" x:Name="LVGeneros" SelectedValue="{Binding GeneroId}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="140" Height="210" SelectionMode="Multiple"></ListView>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label FontWeight="Bold" Background="#E7E9EC" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Autores</Label>
+                    <ListView Grid.Row="1" Grid.Column="0" x:Name="LVAutoresT" SelectedValue="{Binding AutorId}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="140" Height="210" SelectionMode="Multiple"></ListView>
+
+                    <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="2,0,2,0">
+                        <Button x:Name="AñadirAu" Grid.Column="1" FontSize="13" Margin="0,5,0,5" Click="AñadirAu_Click">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                                    <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Button.Background> Añadir->
+                        </Button>
+                        <Button x:Name="QuitarAu" Grid.Column="1" FontSize="13" Margin="0,5,0,5" Click="QuitarAu_Click">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                                    <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Button.Background> Quitar
+                        </Button>
+                    </StackPanel>
+
+                    <Label FontWeight="Bold" Background="#E7E9EC" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">Autores del libro</Label>
+                    <ListView Grid.Row="1" Grid.Column="2" x:Name="LVAutores" SelectedValue="{Binding AutorId}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="140" Height="210" SelectionMode="Multiple"></ListView>
+                </Grid>
+
+                <Button x:Name="BTModificar" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,20,20,0" Grid.Column="1" FontSize="13" Click="BTModificar_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background> Guardar cambios
+                </Button>
+
+                <Button x:Name="BTBorrarSel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="70,10,70,0" Grid.Column="1" FontSize="13" Click="BTBorrarSel_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background> Borrar seleccionado
+                </Button>
+            </StackPanel>
+            
+            
+            
+            
+            
+            
+            
+        </Grid>
+        
+        
+
+
+    </Grid>
+</Page>

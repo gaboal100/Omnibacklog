@@ -1,0 +1,143 @@
+﻿<Page x:Class="OmniBacklog.Paginas.Autores"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:OmniBacklog" 
+        xmlns:DAL = "clr-namespace:OmniBacklog.DAL"
+        xmlns:MODEL = "clr-namespace:OmniBacklog.MODEL"
+        xmlns:pgs = "clr-namespace:OmniBacklog.Paginas"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}" 
+      d:DesignHeight="784" d:DesignWidth="1200"
+      Title="Autores">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="1.5*" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="GridGeneros">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ListView x:Name="LVAutoresT" SelectedValue="{Binding GeneroId}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,10" BorderBrush="Black" BorderThickness="1" SelectionMode="Single" SelectionChanged="LVAutoresT_SelectionChanged"></ListView>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label FontWeight="Bold" Margin="0,0,10,0" FontSize="12" Content="Editar nombre:" Padding="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    <TextBox Controls:TextBoxHelper.Watermark="Nombre: máximo 50 caracteres" Controls:TextBoxHelper.ClearTextButton="True" Grid.Column="1" Background="#E7E9EC" BorderBrush="LightGray" x:Name="TBNombreEdit" Foreground="DarkSlateGray" Text="{Binding Path=Nombre,Mode=TwoWay}" VerticalAlignment="Center"></TextBox>
+                    <Button x:Name="EditarNombre" Grid.Column="2" FontSize="13" Margin="10,5,10,5" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="EditarNombre_Click" >
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                                <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Button.Background> Editar
+                    </Button>
+                    <Button x:Name="BorrarAutor" Grid.Column="3" FontSize="13" Margin="10,0,10,5" VerticalAlignment="Bottom" Click="BorrarAutor_Click" >
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                                <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Button.Background> Borrar
+                    </Button>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1" x:Name="GridGeneroNuevo">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label FontWeight="Bold" Margin="10" FontSize="16" Content="Añadir autor" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label FontWeight="Bold" Margin="0,0,10,0" FontSize="12" Content="Nombre: " Padding="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    <TextBox Controls:TextBoxHelper.Watermark="Nombre: máximo 50 caracteres" Controls:TextBoxHelper.ClearTextButton="True" Grid.Column="1" Background="#E7E9EC" BorderBrush="LightGray" x:Name="TBAutAñadir" Foreground="DarkSlateGray" Text="{Binding Path=Nombre,Mode=TwoWay}" VerticalAlignment="Center" Margin="10,0,40,0"></TextBox>
+                </Grid>
+                <Button x:Name="AñadirAut" Grid.Row="2" FontSize="13" Margin="100,5,100,5" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="AñadirAut_Click" Content="Añadir autor">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="269*"/>
+                <ColumnDefinition Width="331*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.15*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label FontWeight="Bold" Margin="10,20,10,0" FontSize="16" Content="Libros" Grid.Row="0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+            <Grid Margin="0,61,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0">
+                    <DataGrid Margin="10,10,10,10" x:Name="DGLibros" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" Background="White" Grid.Row="0" SelectionMode="Extended" SelectionChanged="DGLibros_SelectionChanged" BorderBrush="#CC000000" BorderThickness="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Path=LibroId}" Width="0.35*"/>
+                            <DataGridTextColumn Header="Título" Binding="{Binding Path=Titulo}" Width="1*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Numerado" Binding="{Binding Path=Numerado}" Width="0.4*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Saga" Binding="{Binding Path=Saga.Nombre}" Width="1*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.3*"/>
+                    </Grid.RowDefinitions>
+                    <Label FontWeight="Bold" Margin="10" FontSize="16" Content="Cambiar autores" Grid.Row="0" VerticalAlignment="Bottom" />
+                    <CheckBox Content="Sin asignar" IsChecked="False" x:Name="checkDefault" Grid.Row="1" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="checkDefault_Checked" Unchecked="checkDefault_Unchecked"></CheckBox>
+                    <ListView Grid.Row="2" Grid.Column="0" x:Name="LVAutoresCambiar" SelectedValue="{Binding GeneroId}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionMode="Extended" Margin="10,10,10,10" BorderBrush="Black" BorderThickness="1" SelectionChanged="LVAutoresCambiar_SelectionChanged"></ListView>
+                    <Button x:Name="CambiarAutores" Grid.Row="3" FontSize="13" Margin="100,5,100,5" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="CambiarAutores_Click">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF6E6E6E" Offset="1"/>
+                                <GradientStop Color="#FFF9F9F9" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Button.Background> Cambiar autores
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Page>

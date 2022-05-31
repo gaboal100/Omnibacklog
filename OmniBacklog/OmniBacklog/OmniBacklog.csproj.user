@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ShowAllFiles>true</ShowAllFiles>
+    <_LastSelectedProfileId>H:\DAM2\0%29Práctica Final DI - AD\OmniBacklog\OmniBacklog\Properties\PublishProfiles\FolderProfile2.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="MainWindowRegistrar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Paginas\Autores.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Paginas\AñadirABiblio.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Paginas\BorrarCosas.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Paginas\Generos.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Paginas\Libreria.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Paginas\LibreriaNLibroSaga.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Paginas\MiBiblioteca.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Paginas\MiCuenta.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Principal.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PrincipalPDF.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindowRegistrar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Paginas\Autores.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Paginas\AñadirABiblio.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Paginas\BorrarCosas.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Paginas\Generos.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Paginas\Libreria.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Paginas\LibreriaNLibroSaga.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Paginas\MiBiblioteca.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Paginas\MiCuenta.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Principal.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PrincipalPDF.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,145 @@
+﻿<Window x:Class="OmniBacklog.Principal"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+          xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:OmniBacklog"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}" Height="800" Width="1400" ResizeMode="CanMinimize"
+        Title="OmniBacklog" >
+    <Grid Background="#02394A" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel x:Name="stack_menu" Background="#02394A" VerticalAlignment="Top">
+            <Label VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="lb_nombre" FontSize="16" Foreground="White" Margin="0,10,0,0" Content="Menú"/>
+            <Border Width="100" Margin="10,10,10,0" BorderBrush="DarkGray" BorderThickness="1"/>
+            <Button x:Name="BTBiblio" Click="BTBiblio_Click" 
+                            Foreground="White" 
+                            Background="Transparent" 
+                            BorderThickness="0" 
+                            Margin="0 10 0 0 "
+                        
+                            FontSize="12" 
+                        
+                            Height="52">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconRemixIcon  Kind="BookMarkFill"/>
+                    <TextBlock Margin="8 0 0 0"  Foreground="Azure">Mi biblioteca</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BTBookBase" Click="BTBookBase_Click" 
+                            Foreground="White" 
+                            Background="Transparent" 
+                            BorderThickness="0" 
+                            Margin="0 10 0 0 "
+                        
+                            FontSize="12" 
+                        
+                            Height="52">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconRemixIcon  Kind="BookOpenLine"/>
+                    <TextBlock Margin="8 0 0 0"  Foreground="Azure">Libros</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BTAutores" Click="BTAutores_Click" 
+                           
+                            Foreground="White" 
+                            Background="Transparent" 
+                            BorderThickness="0" 
+                            Margin="0 10 0 0 "
+                     
+                            FontSize="12" 
+                            Height="52">
+                <StackPanel  Orientation="Horizontal">
+                    <iconPacks:PackIconRemixIcon Kind="User2Fill"/>
+                    <TextBlock Margin="8 0 0 0" Foreground="Azure">Autores</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BTGeneros" Click="BTGeneros_Click"   
+                            Foreground="White" 
+                            Background="Transparent" 
+                            BorderThickness="0" 
+                            Margin="0 10 0 0 "
+               
+                            FontSize="12" 
+                            Height="52">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconRemixIcon Height="12" Width="12" Kind="AncientGateFill"/>
+                    <TextBlock Margin="8 0 0 0" Foreground="Azure"> Géneros</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BTMicuenta" Click="BTMicuenta_Click"   
+                            Foreground="White" 
+                            Background="Transparent" 
+                            BorderThickness="0" 
+                            Margin="0 10 0 0 "
+               
+                            FontSize="12" 
+                            Height="52">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconRemixIcon Height="12" Width="12" Kind="AccountBoxFill"/>
+                    <TextBlock Margin="8 0 0 0" Foreground="Azure">Mi cuenta</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="BTAyuda"    
+                            Foreground="White" 
+                            Background="Transparent" 
+                            BorderThickness="0" 
+                            Margin="0 10 0 0 "
+               
+                            FontSize="12" 
+                            Height="52" Click="BTAyuda_Click">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconRemixIcon Height="12" Width="12" Kind="QuestionFill"/>
+                    <TextBlock Margin="8 0 0 0" Foreground="Azure">Ayuda</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="BTCerrarSesion"   
+                            Foreground="White" 
+                            Background="Transparent" 
+                            BorderThickness="0" 
+                            Margin="0 10 0 0 "
+               
+                            FontSize="12" 
+                            Height="52" Click="BTCerrarSesion_Click">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconRemixIcon Height="12" Width="12" Kind="DoorOpenFill"/>
+                    <TextBlock Margin="8 0 0 0" Foreground="Azure">Cerrar sesión</TextBlock>
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+        <Button x:Name="BTpdf" 
+                            Foreground="White" 
+                            Background="Transparent" 
+                            BorderThickness="0" 
+                            Margin="0 10 0 0 "
+                        
+                            FontSize="12" 
+                        
+                            Height="52" VerticalAlignment="Bottom" Click="BTpdf_Click">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconRemixIcon  Kind="FilePaper2Line"/>
+                <TextBlock Margin="8 0 0 0"  Foreground="Azure">Crear informe</TextBlock>
+            </StackPanel>
+        </Button>
+        <Frame x:Name="Frame" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden" Background="White" Navigated="Frame_Navigated" />
+
+
+    </Grid>
+</Window>
