@@ -24,6 +24,7 @@ namespace OmniBacklog.Paginas
     {
         UnitOfWork bd = new UnitOfWork();
         Usuario usuario;
+        public static List<string> nombres = new List<string>();
 
         public MiBiblioteca()
         {
@@ -36,6 +37,11 @@ namespace OmniBacklog.Paginas
         {
             DGBiblio.ItemsSource = bd.BibliotecaPersonalRepository.getBiblioteca(usuario.UsuarioId); 
             DGLeyendo.ItemsSource = bd.BibliotecaPersonalRepository.getLeyendo(usuario.UsuarioId).ToList();
+            nombres.Clear();
+            foreach (BibliotecaPersonal biblio in bd.BibliotecaPersonalRepository.getBiblioteca(usuario.UsuarioId))
+            {
+                nombres.Add(biblio.Libro.Titulo);
+            }
         }
 
         private void DGLeyendo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -169,8 +175,57 @@ namespace OmniBacklog.Paginas
 
         private void BTAñadirABiblio_Click(object sender, RoutedEventArgs e)
         {
-            AñadirABiblio añadir = new AñadirABiblio(DGBiblio);
+            AñadirABiblio añadir = new AñadirABiblio(DGBiblio, bd, nombres);
             añadir.ShowDialog();
+        }
+
+        private void Suggestion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Suggestion.ItemsSource != null)
+            {
+                Suggestion.Visibility = Visibility.Collapsed;
+                //?
+                if (Suggestion.SelectedIndex != -1)
+                {
+                    TBNombreBuscar.Text = Suggestion.SelectedItem.ToString();
+                }
+                Suggestion.SelectedIndex = -1;
+            }
+        }
+
+        private void TBNombreBuscar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string typedString = TBNombreBuscar.Text;
+            List<string> autoList = new List<string>();
+            autoList.Clear();
+
+            foreach (string item in nombres)
+            {
+                if (!string.IsNullOrEmpty(TBNombreBuscar.Text))
+                {
+                    if (item.ToLower().Contains(typedString.ToLower()))
+                    {
+                        autoList.Add(item);
+                    }
+                }
+            }
+
+            if (autoList.Count > 0)
+            {
+                Suggestion.ItemsSource = autoList;
+                Suggestion.Visibility = Visibility.Visible;
+                Suggestion.IsDropDownOpen = true;
+            }
+            else if (TBNombreBuscar.Text.Equals(""))
+            {
+                Suggestion.Visibility = Visibility.Collapsed;
+                Suggestion.ItemsSource = null;
+            }
+            else
+            {
+                Suggestion.Visibility = Visibility.Collapsed;
+                Suggestion.ItemsSource = null;
+            }
         }
     }
 }

@@ -32,8 +32,10 @@ namespace OmniBacklog.Paginas
 
         TreeView FTree;
         ComboBox combo;
+        List<string> nameList;
+        ComboBox comboNombres;
 
-        public LibreriaNLibroSaga(TreeView tree, ComboBox c1, UnitOfWork unit)
+        public LibreriaNLibroSaga(TreeView tree, ComboBox c1, UnitOfWork unit, List<string> nombres, ComboBox comboNoms)
         {
             bd = unit;
             InitializeComponent();
@@ -60,7 +62,8 @@ namespace OmniBacklog.Paginas
 
             FTree = tree;
             combo = c1;
-            
+            nameList = nombres;
+            comboNombres = comboNoms;
         }
 
         private void AñadirSaga_Click(object sender, RoutedEventArgs e)
@@ -300,6 +303,7 @@ namespace OmniBacklog.Paginas
             //Libreria.sagasP.Clear();
             //Libreria.sagasPT.Clear();
             //Libreria.libros.Clear();
+            nameList.Clear();
 
             Libreria.sagasP = bd.SagaRepository.GetAll();
             Libreria.sagasPT = bd.SagaRepository.GetTree();
@@ -311,6 +315,16 @@ namespace OmniBacklog.Paginas
             
             FTree.Items.Refresh();
             combo.Items.Refresh();
+
+            foreach (Saga saga in Libreria.sagasP)
+            {
+                nameList.Add(saga.Nombre);
+                foreach (Libro libro in saga.Libros)
+                {
+                    nameList.Add(libro.Titulo);
+                }
+            }
+
             bd.Save();
         }
     }

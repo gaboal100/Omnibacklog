@@ -30,5 +30,15 @@ namespace OmniBacklog.DAL
         {
             return Get(includeProperties: "AutorLibros,GeneroLibros");
         }
+
+        public List<string> getTitulos()
+        {
+            List<string> titles = new List<string>();
+            foreach(Libro libro in GetAll())
+            {
+                titles.Add(libro.Titulo);
+            }
+            return titles;
+        }
     }
 }

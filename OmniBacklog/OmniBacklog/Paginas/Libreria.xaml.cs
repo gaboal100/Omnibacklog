@@ -31,6 +31,7 @@ namespace OmniBacklog.Paginas
         public static List<Libro> libros = new List<Libro>();
         public static List<Saga> sagasP = new List<Saga>();
         public static List<Saga> sagasPT = new List<Saga>();
+        public static List<string> nombres = new List<string>();
         public static List<GeneroLibro> genLib;
         public static List<AutorLibro> autLib;
 
@@ -48,6 +49,7 @@ namespace OmniBacklog.Paginas
             sagasP.Clear();
             sagasPT.Clear();
             libros.Clear();
+            nombres.Clear();
 
             sagasP = bd.SagaRepository.GetAll();
             sagasPT = bd.SagaRepository.GetTree();
@@ -56,6 +58,15 @@ namespace OmniBacklog.Paginas
             libros.OrderBy(a => a.Numerado).ThenBy(a => a.Titulo);
 
             TVSagaP.ItemsSource = sagasPT/*.OrderBy(a => a.Numerado)*/;
+
+            foreach(Saga saga in sagasP)
+            {
+                nombres.Add(saga.Nombre);
+                foreach(Libro libro in saga.Libros)
+                {
+                    nombres.Add(libro.Titulo);
+                }
+            }
             //CBSagas.ItemsSource = sagasP;
             //CBSagas.DisplayMemberPath = "Nombre";
             //CBSagas.SelectedValuePath = "SagaId";
@@ -298,7 +309,7 @@ namespace OmniBacklog.Paginas
         private void BTNew_Click(object sender, RoutedEventArgs e)
         {
             TVSagaP.Items.Refresh();
-            nuevo = new LibreriaNLibroSaga(TVSagaP, CBSagas, bd);
+            nuevo = new LibreriaNLibroSaga(TVSagaP, CBSagas, bd, nombres, Suggestion); //faltan la lista de nombres y el listbox
             nuevo.ShowDialog();
         }
 
@@ -651,7 +662,7 @@ namespace OmniBacklog.Paginas
 
         private void CBSagas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
 
         private void BTBorrarSel_Click(object sender, RoutedEventArgs e)
@@ -716,6 +727,54 @@ namespace OmniBacklog.Paginas
                     TVSagaP.Items.Refresh();
                 }
             }       
+        }
+
+        private void Suggestion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Suggestion.ItemsSource != null)
+            {
+                Suggestion.Visibility = Visibility.Collapsed;
+                if (Suggestion.SelectedIndex != -1)
+                {
+                    TBNombreBuscar.Text = Suggestion.SelectedItem.ToString();
+                }
+                Suggestion.SelectedIndex = -1;
+            }
+        }
+
+        private void TBNombreBuscar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string typedString = TBNombreBuscar.Text;
+            List<string> autoList = new List<string>();
+            autoList.Clear();
+
+            foreach (string item in nombres)
+            {
+                if (!string.IsNullOrEmpty(TBNombreBuscar.Text))
+                {
+                    if (item.ToLower().Contains(typedString.ToLower()))
+                    {
+                        autoList.Add(item);
+                    }
+                }
+            }
+
+            if (autoList.Count > 0)
+            {
+                Suggestion.ItemsSource = autoList;
+                Suggestion.Visibility = Visibility.Visible;
+                Suggestion.IsDropDownOpen = true;
+            }
+            else if (TBNombreBuscar.Text.Equals(""))
+            {
+                Suggestion.Visibility = Visibility.Collapsed;
+                Suggestion.ItemsSource = null;
+            }
+            else
+            {
+                Suggestion.Visibility = Visibility.Collapsed;
+                Suggestion.ItemsSource = null;
+            }
         }
     }
 }

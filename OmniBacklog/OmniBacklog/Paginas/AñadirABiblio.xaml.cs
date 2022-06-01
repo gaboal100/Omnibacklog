@@ -21,16 +21,21 @@ namespace OmniBacklog.Paginas
     /// </summary>
     public partial class AñadirABiblio : Window
     {
-        UnitOfWork bd = new UnitOfWork();
+        UnitOfWork bd;
         Usuario usuario;
         DataGrid grid;
+        List<string> lNombres;
+        List<string> allBooks;
 
-        public AñadirABiblio(DataGrid elGrid)
+        public AñadirABiblio(DataGrid elGrid, UnitOfWork unit, List<string> nombres)
         {
             InitializeComponent();
-            DGLibros.ItemsSource = bd.LibroRepository.GetAll();
-            usuario = MainWindow.login;
             grid = elGrid;
+            bd = unit;
+            lNombres = nombres;
+            DGLibros.ItemsSource = bd.LibroRepository.GetAll();
+            allBooks = bd.LibroRepository.getTitulos();
+            usuario = MainWindow.login;
         }
 
         private void BTAñadirBiblio_Click(object sender, RoutedEventArgs e)
@@ -54,6 +59,7 @@ namespace OmniBacklog.Paginas
                         BibliotecaPersonal adicion = new BibliotecaPersonal();
                         adicion.LibroId = libro.LibroId;
                         adicion.UsuarioId = usuario.UsuarioId;
+                        lNombres.Add(adicion.Libro.Titulo);
                         bd.BibliotecaPersonalRepository.Añadir(adicion);
                         bd.Save();
                     }
@@ -100,6 +106,55 @@ namespace OmniBacklog.Paginas
             else
             {
                 DGLibros.ItemsSource = bd.LibroRepository.getSpecificBooks(TBNombreBuscar.Text);
+            }
+        }
+
+        private void Suggestion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Suggestion.ItemsSource != null)
+            {
+                Suggestion.Visibility = Visibility.Collapsed;
+                //?
+                if (Suggestion.SelectedIndex != -1)
+                {
+                    TBNombreBuscar.Text = Suggestion.SelectedItem.ToString();
+                }
+                Suggestion.SelectedIndex = -1;
+            }
+        }
+
+        private void TBNombreBuscar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string typedString = TBNombreBuscar.Text;
+            List<string> autoList = new List<string>();
+            autoList.Clear();
+
+            foreach (string item in allBooks)
+            {
+                if (!string.IsNullOrEmpty(TBNombreBuscar.Text))
+                {
+                    if (item.ToLower().Contains(typedString.ToLower()))
+                    {
+                        autoList.Add(item);
+                    }
+                }
+            }
+
+            if (autoList.Count > 0)
+            {
+                Suggestion.ItemsSource = autoList;
+                Suggestion.Visibility = Visibility.Visible;
+                Suggestion.IsDropDownOpen = true;
+            }
+            else if (TBNombreBuscar.Text.Equals(""))
+            {
+                Suggestion.Visibility = Visibility.Collapsed;
+                Suggestion.ItemsSource = null;
+            }
+            else
+            {
+                Suggestion.Visibility = Visibility.Collapsed;
+                Suggestion.ItemsSource = null;
             }
         }
     }

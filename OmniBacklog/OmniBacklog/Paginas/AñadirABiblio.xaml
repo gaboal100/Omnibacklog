@@ -32,7 +32,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="0.12*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" Controls:TextBoxHelper.Watermark="Introduce el título del libro" Controls:TextBoxHelper.ClearTextButton="True" Background="#E7E9EC" BorderBrush="LightGray" x:Name="TBNombreBuscar" Foreground="DarkSlateGray" Text="{Binding Path=Titulo,Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="16" Margin="10,0,10,0"></TextBox>
+            <ComboBox Grid.Column="0" x:Name="Suggestion" Background="AntiqueWhite" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="16" Margin="10,0,10,0" SelectionChanged="Suggestion_SelectionChanged" />
+            <TextBox Grid.Column="0" Controls:TextBoxHelper.Watermark="Introduce el título del libro" Controls:TextBoxHelper.ClearTextButton="True" Background="#E7E9EC" BorderBrush="LightGray" x:Name="TBNombreBuscar" Foreground="DarkSlateGray" Text="{Binding Path=Titulo,Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="16" Margin="10,0,10,0" TextChanged="TBNombreBuscar_TextChanged"></TextBox>
             <Button x:Name="BTBuscar" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" FontSize="14" Margin="10,0,10,0" Padding="10,6,10,6" Click="BTBuscar_Click">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
