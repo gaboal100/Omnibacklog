@@ -162,7 +162,7 @@ namespace OmniBacklog.Paginas {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OmniBacklog;V1.0.0.0;component/paginas/borrarcosas.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OmniBacklog;component/paginas/borrarcosas.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Paginas\BorrarCosas.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

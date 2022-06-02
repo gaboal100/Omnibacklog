@@ -53,13 +53,13 @@ namespace OmniBacklog.Paginas
 
             sagasP = bd.SagaRepository.GetAll();
             sagasPT = bd.SagaRepository.GetTree();
-            libros = bd.LibroRepository.GetAll(); //Técnicamente no lo uso en ningún momento pero si lo quito no me aparecen varios libros
+            libros = bd.LibroRepository.GetAll();//Técnicamente no lo uso en ningún momento pero si lo quito no me aparecen varios libros
             sagasP.OrderBy(a => a.Numerado).ThenBy(a => a.SagaId);
             libros.OrderBy(a => a.Numerado).ThenBy(a => a.Titulo);
 
             TVSagaP.ItemsSource = sagasPT/*.OrderBy(a => a.Numerado)*/;
 
-            foreach(Saga saga in sagasP)
+            foreach (Saga saga in sagasP)
             {
                 nombres.Add(saga.Nombre);
                 foreach(Libro libro in saga.Libros)

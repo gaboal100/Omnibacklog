@@ -29,7 +29,7 @@ namespace OmniBacklog.Paginas
             for (int i = 0; i < values.Length; i++)
             {
                 IEnumerable childs = values[i] as IEnumerable ?? new List<object> { values[i] };
-                
+
                 //Recorre los hijos de childs y los añade a la lista de items
                 foreach (var child in childs) { items.Add(child); }
             }

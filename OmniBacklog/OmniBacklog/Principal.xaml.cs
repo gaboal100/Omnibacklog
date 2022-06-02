@@ -29,7 +29,6 @@ namespace OmniBacklog
     public partial class Principal : Window
     {
         UnitOfWork bd = new UnitOfWork();
-        PrincipalPDF pdf = new PrincipalPDF();
 
         public Principal()
         {
@@ -91,7 +90,7 @@ namespace OmniBacklog
             //{
             //    pdf.Close();
             //}
-            if (oFD.ShowDialog() == true && pdf.IsActive == false)
+            if (oFD.ShowDialog() == true)
             {
                 //Logica de creación del pdf
                 #region
@@ -494,7 +493,7 @@ namespace OmniBacklog
                 #endregion
 
                 Uri PDFPath = new Uri(oFD.FileName, UriKind.Absolute);
-                pdf = new PrincipalPDF(PDFPath);
+                PrincipalPDF pdf = new PrincipalPDF(PDFPath);
                 pdf.Close();
                 //if (pdf.IsActive == false)
                 //{
@@ -505,7 +504,7 @@ namespace OmniBacklog
 
         private void BTAyuda_Click(object sender, RoutedEventArgs e)
         {
-            pdf = new PrincipalPDF();
+            PrincipalPDF pdf = new PrincipalPDF();
             pdf.Close();
             //if (pdf.IsActive == false)
             //{

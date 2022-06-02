@@ -146,7 +146,7 @@ namespace OmniBacklog.Paginas {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OmniBacklog;V1.0.0.0;component/paginas/micuenta.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OmniBacklog;component/paginas/micuenta.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Paginas\MiCuenta.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
