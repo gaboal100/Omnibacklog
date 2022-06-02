@@ -100,21 +100,11 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="BTNew" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,20,20,20" Grid.Column="0" FontSize="16" Click="BTNew_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                        </LinearGradientBrush>
-                    </Button.Background> Añadir Libro/Saga
+                     Añadir Libro/Saga
                 </Button>
 
             <Button x:Name="BTElim" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,20,20,20" Grid.Column="2" FontSize="16" Click="BTElim_Click">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                        <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                    </LinearGradientBrush>
-                </Button.Background> Eliminar y mover en masa
+                 Eliminar y mover en masa
             </Button>
         </Grid>
 
@@ -152,20 +142,10 @@
 
                     <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="2,0,2,0">
                         <Button x:Name="AñadirGen" Grid.Column="1" FontSize="13" Margin="0,5,0,5" Click="AñadirGen_Click">
-                            <Button.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                                    <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                                </LinearGradientBrush>
-                            </Button.Background> Añadir->
+                             Añadir->
                         </Button>
                         <Button x:Name="QuitarGen" Grid.Column="1" FontSize="13" Margin="0,5,0,5" Click="QuitarGen_Click">
-                            <Button.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                                    <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                                </LinearGradientBrush>
-                            </Button.Background> Quitar
+                             Quitar
                         </Button>
                     </StackPanel>
                     
@@ -188,20 +168,10 @@
 
                     <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="2,0,2,0">
                         <Button x:Name="AñadirAu" Grid.Column="1" FontSize="13" Margin="0,5,0,5" Click="AñadirAu_Click">
-                            <Button.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                                    <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                                </LinearGradientBrush>
-                            </Button.Background> Añadir->
+                             Añadir->
                         </Button>
                         <Button x:Name="QuitarAu" Grid.Column="1" FontSize="13" Margin="0,5,0,5" Click="QuitarAu_Click">
-                            <Button.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                                    <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                                </LinearGradientBrush>
-                            </Button.Background> Quitar
+                            Quitar
                         </Button>
                     </StackPanel>
 
@@ -210,21 +180,11 @@
                 </Grid>
 
                 <Button x:Name="BTModificar" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,20,20,0" Grid.Column="1" FontSize="13" Click="BTModificar_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                        </LinearGradientBrush>
-                    </Button.Background> Guardar cambios
+                     Guardar cambios
                 </Button>
 
                 <Button x:Name="BTBorrarSel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="70,10,70,0" Grid.Column="1" FontSize="13" Click="BTBorrarSel_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                        </LinearGradientBrush>
-                    </Button.Background> Borrar seleccionado
+                     Borrar seleccionado
                 </Button>
             </StackPanel>
             

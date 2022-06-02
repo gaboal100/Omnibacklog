@@ -29,6 +29,7 @@ namespace OmniBacklog
     public partial class Principal : Window
     {
         UnitOfWork bd = new UnitOfWork();
+        PrincipalPDF pdf = new PrincipalPDF();
 
         public Principal()
         {
@@ -86,8 +87,14 @@ namespace OmniBacklog
             oFD.Title = "Selecciona el archivo para guardar el PDF";
             oFD.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             oFD.FileName = "Informe";
-            if (oFD.ShowDialog() == true)
+            //if (pdf.IsActive == true)
+            //{
+            //    pdf.Close();
+            //}
+            if (oFD.ShowDialog() == true && pdf.IsActive == false)
             {
+                //Logica de creación del pdf
+                #region
                 PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(oFD.FileName, FileMode.Create));
                 MyPageEvents events = new MyPageEvents();
                 writer.PageEvent = events;
@@ -226,7 +233,7 @@ namespace OmniBacklog
                 table = new PdfPTable(2);
                 table.TotalWidth = 500f;
                 table.LockedWidth = true;
-                table.SetWidths(new float[] { 0.2f, 0.8f});
+                table.SetWidths(new float[] { 0.2f, 0.8f });
 
                 cell = new PdfPCell(new Phrase("ID", cellHeader));
                 cell.HorizontalAlignment = Element.ALIGN_CENTER;
@@ -484,29 +491,27 @@ namespace OmniBacklog
                 document.Add(table);
 
                 document.Close();
+                #endregion
 
                 Uri PDFPath = new Uri(oFD.FileName, UriKind.Absolute);
-                PrincipalPDF pdf = new PrincipalPDF(PDFPath);
+                pdf = new PrincipalPDF(PDFPath);
                 pdf.Close();
                 //if (pdf.IsActive == false)
                 //{
                 //    pdf.Show();
                 //}
             }
-
-            
-
         }
 
         private void BTAyuda_Click(object sender, RoutedEventArgs e)
         {
-            PrincipalPDF pdf = new PrincipalPDF();
+            pdf = new PrincipalPDF();
             pdf.Close();
-            //if(pdf.IsActive == false)
+            //if (pdf.IsActive == false)
             //{
             //    pdf.Show();
             //}
-            
+
         }
 
         private void Frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)

@@ -49,20 +49,10 @@
                     <Label FontWeight="Bold" Margin="0,0,10,0" FontSize="12" Content="Editar nombre:" Padding="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     <TextBox Controls:TextBoxHelper.Watermark="Nombre: máximo 50 caracteres" Controls:TextBoxHelper.ClearTextButton="True" Grid.Column="1" Background="#E7E9EC" BorderBrush="LightGray" x:Name="TBNombreEdit" Foreground="DarkSlateGray" Text="{Binding Path=Nombre,Mode=TwoWay}" VerticalAlignment="Center"></TextBox>
                     <Button x:Name="EditarNombre" Grid.Column="2" FontSize="13" Margin="10,5,10,5" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="EditarNombre_Click" >
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                                <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                            </LinearGradientBrush>
-                        </Button.Background> Editar
+                         Editar
                     </Button>
                     <Button x:Name="BorrarAutor" Grid.Column="3" FontSize="13" Margin="10,0,10,5" VerticalAlignment="Bottom" Click="BorrarAutor_Click" >
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                                <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                            </LinearGradientBrush>
-                        </Button.Background> Borrar
+                         Borrar
                     </Button>
                 </Grid>
             </Grid>
@@ -83,12 +73,7 @@
                     <TextBox Controls:TextBoxHelper.Watermark="Nombre: máximo 50 caracteres" Controls:TextBoxHelper.ClearTextButton="True" Grid.Column="1" Background="#E7E9EC" BorderBrush="LightGray" x:Name="TBAutAñadir" Foreground="DarkSlateGray" Text="{Binding Path=Nombre,Mode=TwoWay}" VerticalAlignment="Center" Margin="10,0,40,0"></TextBox>
                 </Grid>
                 <Button x:Name="AñadirAut" Grid.Row="2" FontSize="13" Margin="100,5,100,5" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="AñadirAut_Click" Content="Añadir autor">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
+                    
                 </Button>
             </Grid>
         </Grid>
@@ -128,12 +113,7 @@
                     <CheckBox Content="Sin asignar" IsChecked="False" x:Name="checkDefault" Grid.Row="1" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="checkDefault_Checked" Unchecked="checkDefault_Unchecked"></CheckBox>
                     <ListView Grid.Row="2" Grid.Column="0" x:Name="LVAutoresCambiar" SelectedValue="{Binding GeneroId}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionMode="Extended" Margin="10,10,10,10" BorderBrush="Black" BorderThickness="1" SelectionChanged="LVAutoresCambiar_SelectionChanged"></ListView>
                     <Button x:Name="CambiarAutores" Grid.Row="3" FontSize="13" Margin="100,5,100,5" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="CambiarAutores_Click">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                                <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                            </LinearGradientBrush>
-                        </Button.Background> Cambiar autores
+                         Cambiar autores
                     </Button>
                 </Grid>
             </Grid>

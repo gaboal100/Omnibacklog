@@ -53,12 +53,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button x:Name="BorrarSagas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" FontSize="16" Margin="10,30,10,30" Click="BorrarSagas_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                        </LinearGradientBrush>
-                    </Button.Background> Borrar
+                     Borrar
                 </Button>
 
                 <ComboBox Name="CBSagasS"  Margin="10,35,10,35" SelectedValue="{Binding Path=SagaId, Mode=TwoWay}" Grid.Column="1" SelectedIndex="0" FontSize="16" BorderBrush="Black" >
@@ -72,20 +67,10 @@
                     </Grid.RowDefinitions>
 
                     <Button x:Name="CSPadres" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="16" Click="CSPadres_Click" Margin="5,10,5,10">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                                <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                            </LinearGradientBrush>
-                        </Button.Background> Cambiar padre
+                         Cambiar padre
                     </Button>
                     <Button x:Name="BSPadres" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" FontSize="16"  Margin="5,10,5,10" Click="BSPadres_Click" Content="Hacer principal">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                                <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
+                        
                     </Button>
                 </Grid>
 
@@ -121,12 +106,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button x:Name="BorrarLibros" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" FontSize="16" Margin="10,30,10,30" Click="BorrarLibros_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                        </LinearGradientBrush>
-                    </Button.Background> Borrar
+                     Borrar
                 </Button>
 
                 <ComboBox Name="CBSagasL"  Margin="10,35,10,35" SelectedValue="{Binding Path=SagaId, Mode=TwoWay}" Grid.Column="1" SelectedIndex="0" FontSize="16" BorderBrush="Black" >
@@ -134,12 +114,7 @@
                 </ComboBox>
 
                 <Button x:Name="CLPadres" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2" FontSize="16" Margin="10,30,10,30" Click="CLPadres_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                        </LinearGradientBrush>
-                    </Button.Background> Cambiar padre
+                     Cambiar padre
                 </Button>
 
             </Grid>

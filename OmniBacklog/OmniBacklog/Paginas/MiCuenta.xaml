@@ -61,30 +61,15 @@
                 <PasswordBox Grid.Row="4" Grid.Column="1" Controls:TextBoxHelper.Watermark="Mínimo 6 caracteres, máximo 50"  Controls:TextBoxHelper.ClearTextButton="True" Background="#E7E9EC" BorderBrush="LightGray" x:Name="PBRContraseña" Foreground="DarkSlateGray" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20"></PasswordBox>
 
                 <Button x:Name="BTCambiarNombre" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" FontSize="16" Margin="20,10,20,10" Click="BTCambiarNombre_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                        </LinearGradientBrush>
-                    </Button.Background> Cambiar nombre de usuario
+                     Cambiar nombre de usuario
                 </Button>
                 <Button x:Name="BTCambiarPassword" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="3" Grid.RowSpan="2" FontSize="16" Margin="20,40,20,40" Click="BTCambiarPassword_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                            <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                        </LinearGradientBrush>
-                    </Button.Background> Cambiar contraseña
+                     Cambiar contraseña
                 </Button>
             </Grid>
         </GroupBox>
         <Button x:Name="BTBorrarUsuario" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Row="4" FontSize="16" Margin="20,40,20,40" Padding="60,6,60,6" Click="BTBorrarUsuario_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF6E6E6E" Offset="1"/>
-                    <GradientStop Color="#FFF9F9F9" Offset="0"/>
-                </LinearGradientBrush>
-            </Button.Background> Borrar cuenta
+             Borrar cuenta
         </Button>
     </Grid>
 </Page>
