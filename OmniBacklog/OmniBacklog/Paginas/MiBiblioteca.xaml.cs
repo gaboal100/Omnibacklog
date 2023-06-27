@@ -24,7 +24,8 @@ namespace OmniBacklog.Paginas
     {
         UnitOfWork bd = new UnitOfWork();
         Usuario usuario;
-        public static List<string> nombres = new List<string>();
+        public static List<string> nombreLibros = new List<string>();
+        public static List<string> nombreSagas = new List<string>();
 
         public MiBiblioteca()
         {
@@ -37,10 +38,21 @@ namespace OmniBacklog.Paginas
         {
             DGBiblio.ItemsSource = bd.BibliotecaPersonalRepository.getBiblioteca(usuario.UsuarioId); 
             DGLeyendo.ItemsSource = bd.BibliotecaPersonalRepository.getLeyendo(usuario.UsuarioId).ToList();
-            nombres.Clear();
+            nombreLibros.Clear();
             foreach (BibliotecaPersonal biblio in bd.BibliotecaPersonalRepository.getBiblioteca(usuario.UsuarioId))
             {
-                nombres.Add(biblio.Libro.Titulo);
+                nombreLibros.Add(biblio.Libro.Titulo);
+                bool repe = false;
+                foreach(string nomSagas in nombreSagas)
+                {
+                    if (biblio.Libro.Saga.Nombre.Equals(nomSagas)){
+                        repe = true;
+                    }
+                }
+                if(repe == false)
+                {
+                    nombreSagas.Add(biblio.Libro.Saga.Nombre);
+                }
             }
         }
 
@@ -175,7 +187,7 @@ namespace OmniBacklog.Paginas
 
         private void BTAñadirABiblio_Click(object sender, RoutedEventArgs e)
         {
-            AñadirABiblio añadir = new AñadirABiblio(DGBiblio, bd, nombres);
+            AñadirABiblio añadir = new AñadirABiblio(DGBiblio, bd, nombreLibros, nombreSagas);
             añadir.ShowDialog();
         }
 
@@ -199,13 +211,29 @@ namespace OmniBacklog.Paginas
             List<string> autoList = new List<string>();
             autoList.Clear();
 
-            foreach (string item in nombres)
+            if (RBSaga.IsChecked == true)
             {
-                if (!string.IsNullOrEmpty(TBNombreBuscar.Text))
+                foreach (string item in nombreSagas)
                 {
-                    if (item.ToLower().Contains(typedString.ToLower()))
+                    if (!string.IsNullOrEmpty(TBNombreBuscar.Text))
                     {
-                        autoList.Add(item);
+                        if (item.ToLower().Contains(typedString.ToLower()))
+                        {
+                            autoList.Add(item);
+                        }
+                    }
+                }
+            }
+            else if (RBLibro.IsChecked == true)
+            {
+                foreach (string item in nombreLibros)
+                {
+                    if (!string.IsNullOrEmpty(TBNombreBuscar.Text))
+                    {
+                        if (item.ToLower().Contains(typedString.ToLower()))
+                        {
+                            autoList.Add(item);
+                        }
                     }
                 }
             }

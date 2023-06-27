@@ -13,6 +13,7 @@ using OmniBacklog.DAL;
 using OmniBacklog.MODEL;
 using System.Linq;
 using System.Linq.Expressions;
+using System.ComponentModel;
 
 namespace OmniBacklog.Paginas
 {
@@ -21,7 +22,7 @@ namespace OmniBacklog.Paginas
     /// </summary>
     public partial class LibreriaNLibroSaga : Window
     {
-        UnitOfWork bd;
+        UnitOfWork bd = new UnitOfWork();
         Saga sagaNueva;
         Saga sagaPadreS;
         Saga sagaPadreL;
@@ -31,14 +32,15 @@ namespace OmniBacklog.Paginas
         List<Saga> SagasL = new List<Saga>();
 
         TreeView FTree;
-        ComboBox combo;
-        List<string> nameList;
+        List<string> lLibros;
+        List<string> lSagas;
         ComboBox comboNombres;
 
-        public LibreriaNLibroSaga(TreeView tree, ComboBox c1, UnitOfWork unit, List<string> nombres, ComboBox comboNoms)
+        public LibreriaNLibroSaga(TreeView tree, List<string> sagas, List<string> libros, ComboBox comboNoms/*, UnitOfWork unit*/)
         {
-            bd = unit;
             InitializeComponent();
+
+
             SagasS = bd.SagaRepository.Get(a => a.SagaId != 1 && a.SagaId != 2);
             CBSagasS.ItemsSource = SagasS;
             CBSagasS.DisplayMemberPath = "Nombre";
@@ -61,8 +63,8 @@ namespace OmniBacklog.Paginas
             NUDNumeradoS.Value = 0;
 
             FTree = tree;
-            combo = c1;
-            nameList = nombres;
+            lLibros = libros;
+            lSagas = sagas;
             comboNombres = comboNoms;
         }
 
@@ -293,17 +295,18 @@ namespace OmniBacklog.Paginas
             NUDNumeradoS.IsEnabled = true;
         }
 
-        public void MainWindow_Close(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            System.Environment.Exit(0);
-        }
+        //public void OnWindowClosing(object sender, CancelEventArgs e)
+        //{
+        //    Libreria.bd = new UnitOfWork();
+        //}
 
         private void bruteload()
         {
             //Libreria.sagasP.Clear();
             //Libreria.sagasPT.Clear();
             //Libreria.libros.Clear();
-            nameList.Clear();
+            lLibros.Clear();
+            lSagas.Clear();
 
             Libreria.sagasP = bd.SagaRepository.GetAll();
             Libreria.sagasPT = bd.SagaRepository.GetTree();
@@ -314,14 +317,13 @@ namespace OmniBacklog.Paginas
             FTree.ItemsSource = Libreria.sagasPT;
             
             FTree.Items.Refresh();
-            combo.Items.Refresh();
 
             foreach (Saga saga in Libreria.sagasP)
             {
-                nameList.Add(saga.Nombre);
+                lSagas.Add(saga.Nombre);
                 foreach (Libro libro in saga.Libros)
                 {
-                    nameList.Add(libro.Titulo);
+                    lLibros.Add(libro.Titulo);
                 }
             }
 

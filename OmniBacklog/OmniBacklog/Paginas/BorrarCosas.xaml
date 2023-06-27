@@ -20,7 +20,7 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}" 
-        Title="Eliminar y mover en masa" Height="750" Width="1150">
+        Title="Eliminar y mover" Height="750" Width="1150">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

@@ -114,7 +114,7 @@ namespace OmniBacklog.Paginas {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OmniBacklog;component/paginas/a%c3%b1adirabiblio.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OmniBacklog;V1.0.0.0;component/paginas/a%c3%b1adirabiblio.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Paginas\AñadirABiblio.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

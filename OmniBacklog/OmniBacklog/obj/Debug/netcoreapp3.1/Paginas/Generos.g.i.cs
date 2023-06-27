@@ -170,7 +170,7 @@ namespace OmniBacklog.Paginas {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OmniBacklog;component/paginas/generos.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OmniBacklog;V1.0.0.0;component/paginas/generos.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Paginas\Generos.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

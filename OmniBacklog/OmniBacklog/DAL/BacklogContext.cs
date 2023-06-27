@@ -41,17 +41,20 @@ namespace OmniBacklog.DAL
             modelBuilder.Entity<Genero>().HasData(new Genero { GeneroId = 3, Nombre = "Ciencia ficción" });
             modelBuilder.Entity<Genero>().HasData(new Genero { GeneroId = 4, Nombre = "Ópera espacial" });
             modelBuilder.Entity<Genero>().HasData(new Genero { GeneroId = 5, Nombre = "Ficción histórica" });
+            modelBuilder.Entity<Genero>().HasData(new Genero { GeneroId = 6, Nombre = "Fantasía" });
+            modelBuilder.Entity<Genero>().HasData(new Genero { GeneroId = 7, Nombre = "Ensayo" });
 
             modelBuilder.Entity<Autor>().HasData(new Autor { AutorId = 1, Nombre = "Sin asignar" }); //Obligatoria y ha de ser imborrable
             modelBuilder.Entity<Autor>().HasData(new Autor { AutorId = 2, Nombre = "J.K. Rowling" });
             modelBuilder.Entity<Autor>().HasData(new Autor { AutorId = 3, Nombre = "George R.R. Martin" });
             modelBuilder.Entity<Autor>().HasData(new Autor { AutorId = 4, Nombre = "Brandon Sanderson" });
+            modelBuilder.Entity<Autor>().HasData(new Autor { AutorId = 5, Nombre = "Stephen King" });
 
             modelBuilder.Entity<Saga>().HasData(new Saga { SagaId = 1, Nombre = "Huérfanos", Numerado = null}); //Obligatoria y ha de ser imborrable
             modelBuilder.Entity<Saga>().HasData(new Saga { SagaId = 2, Nombre = "Únicos", Numerado = null}); //Obligatoria y ha de ser imborrable
 
             modelBuilder.Entity<Saga>().HasData(new Saga { SagaId = 3, Nombre = "Harry Potter", Numerado = null });
-                modelBuilder.Entity<Libro>().HasData(new Libro { LibroId = 1, Titulo = "Harry Potter y la Piedra Filosofal", Numerado = 1, SagaId = 3 });
+                modelBuilder.Entity<Libro>().HasData(new Libro { LibroId = 1, Titulo = "Harry Otter y la Fiedra Pilosofal", Numerado = 1, SagaId = 3 });
                 modelBuilder.Entity<Libro>().HasData(new Libro { LibroId = 2, Titulo = "Harry Potter y la Cámara de los secretos", Numerado = 2, SagaId = 3 });
                 modelBuilder.Entity<Libro>().HasData(new Libro { LibroId = 3, Titulo = "Harry Potter y el Prisionero de Azkaban", Numerado = 3, SagaId = 3 });
                 modelBuilder.Entity<Libro>().HasData(new Libro { LibroId = 4, Titulo = "Harry Potter y el Cáliz de Fuego", Numerado = 4, SagaId = 3 });

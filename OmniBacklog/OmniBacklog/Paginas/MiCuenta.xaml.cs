@@ -58,6 +58,7 @@ namespace OmniBacklog.Paginas
                     bd.UsuarioRepository.Update(MainWindow.login);
                     bd.Save();
                     MessageBox.Show("El nombre de usuario ha sido cambiado con éxito", "Éxito", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    LBLNombre.Content = TBNombre.Text;
                 }
             }
             else

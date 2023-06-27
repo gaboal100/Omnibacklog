@@ -62,7 +62,7 @@ namespace OmniBacklog {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OmniBacklog;component/principalpdf.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OmniBacklog;V1.0.0.0;component/principalpdf.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\PrincipalPDF.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

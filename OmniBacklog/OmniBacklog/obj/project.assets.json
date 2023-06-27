@@ -6880,25 +6880,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\6002192\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Users\\Gabriel\\.nuget\\packages\\": {},
+    "D:\\Application Data\\VisualStudio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DAM2\\0)Trabajo de Fin de Curso\\OmniBacklog\\OmniBacklog\\OmniBacklog.csproj",
+      "projectUniqueName": "G:\\DAM2\\0)Trabajo de Fin de Curso\\OmniBacklog\\OmniBacklog\\OmniBacklog.csproj",
       "projectName": "OmniBacklog",
-      "projectPath": "D:\\DAM2\\0)Trabajo de Fin de Curso\\OmniBacklog\\OmniBacklog\\OmniBacklog.csproj",
-      "packagesPath": "C:\\Users\\6002192\\.nuget\\packages\\",
-      "outputPath": "D:\\DAM2\\0)Trabajo de Fin de Curso\\OmniBacklog\\OmniBacklog\\obj\\",
+      "projectPath": "G:\\DAM2\\0)Trabajo de Fin de Curso\\OmniBacklog\\OmniBacklog\\OmniBacklog.csproj",
+      "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
+      "outputPath": "G:\\DAM2\\0)Trabajo de Fin de Curso\\OmniBacklog\\OmniBacklog\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "D:\\Application Data\\VisualStudio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\6002192\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -6983,7 +6983,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
       }
     }
   },

@@ -191,7 +191,7 @@ namespace OmniBacklog.Paginas {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OmniBacklog;component/paginas/librerianlibrosaga.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OmniBacklog;V1.0.0.0;component/paginas/librerianlibrosaga.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Paginas\LibreriaNLibroSaga.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

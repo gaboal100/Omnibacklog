@@ -494,21 +494,30 @@ namespace OmniBacklog
 
                 Uri PDFPath = new Uri(oFD.FileName, UriKind.Absolute);
                 PrincipalPDF pdf = new PrincipalPDF(PDFPath);
-                pdf.Close();
-                //if (pdf.IsActive == false)
-                //{
-                //    pdf.Show();
-                //}
+                if (pdf.IsActive == false)
+                {
+                    pdf.Show();
+                }
+                //pdf.Close();
+
             }
         }
 
         private void BTAyuda_Click(object sender, RoutedEventArgs e)
         {
-            PrincipalPDF pdf = new PrincipalPDF();
-            pdf.Close();
-            //if (pdf.IsActive == false)
+            PrincipalPDF pdfAyuda = new PrincipalPDF();
+            if (pdfAyuda.IsActive == false)
+            {
+                pdfAyuda.Show();
+            }
+            //pdf.Close();
+            //if (IsWindowOpen<Window>("pdfAyuda"))
             //{
-            //    pdf.Show();
+
+            //}
+            //else
+            //{
+            //    pdfAyuda.Show();
             //}
 
         }

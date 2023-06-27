@@ -23,15 +23,13 @@ namespace OmniBacklog.Paginas
     {
         UnitOfWork bd;
         TreeView FTree;
-        ComboBox combo;
         List<Saga> sagasP = new List<Saga>();
 
-        public BorrarCosas(TreeView tree, ComboBox c1, UnitOfWork unit)
+        public BorrarCosas(TreeView tree,  UnitOfWork unit)
         {
             InitializeComponent();
             bd = unit;
             FTree = tree;
-            combo = c1;
             Cargar();
         }
 
@@ -259,7 +257,6 @@ namespace OmniBacklog.Paginas
             FTree.ItemsSource = Libreria.sagasPT;
 
             FTree.Items.Refresh();
-            combo.Items.Refresh();
             bd.Save();
         }
     }

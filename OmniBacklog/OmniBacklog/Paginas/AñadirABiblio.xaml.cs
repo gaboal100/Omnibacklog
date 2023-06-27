@@ -25,15 +25,17 @@ namespace OmniBacklog.Paginas
         Usuario usuario;
         DataGrid grid;
         List<string> lNombres;
+        List<string> sNombres;
         List<string> allBooks;
 
-        public AñadirABiblio(DataGrid elGrid, UnitOfWork unit, List<string> nombres)
+        public AñadirABiblio(DataGrid elGrid, UnitOfWork unit, List<string> libros, List<string> sagas)
         {
             InitializeComponent();
             grid = elGrid;
             bd = unit;
-            lNombres = nombres;
-            DGLibros.ItemsSource = bd.LibroRepository.GetAll();
+            lNombres = libros;
+            sNombres = sagas;
+            DGLibros.ItemsSource = bd.LibroRepository.getSagaAndLibro();
             allBooks = bd.LibroRepository.getTitulos();
             usuario = MainWindow.login;
         }
@@ -59,7 +61,19 @@ namespace OmniBacklog.Paginas
                         BibliotecaPersonal adicion = new BibliotecaPersonal();
                         adicion.LibroId = libro.LibroId;
                         adicion.UsuarioId = usuario.UsuarioId;
+                        adicion.Libro = libro;
                         lNombres.Add(adicion.Libro.Titulo);
+                        foreach (string nomSaLib in sNombres)
+                        {
+                            if (adicion.Libro.Saga.Nombre.Equals(nomSaLib))
+                            {
+                                repe = true;
+                            }
+                        }
+                        if (repe == false)
+                        {
+                            sNombres.Add(adicion.Libro.Saga.Nombre);
+                        }
                         bd.BibliotecaPersonalRepository.Añadir(adicion);
                         bd.Save();
                     }

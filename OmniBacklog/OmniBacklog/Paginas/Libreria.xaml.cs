@@ -31,7 +31,8 @@ namespace OmniBacklog.Paginas
         public static List<Libro> libros = new List<Libro>();
         public static List<Saga> sagasP = new List<Saga>();
         public static List<Saga> sagasPT = new List<Saga>();
-        public static List<string> nombres = new List<string>();
+        public static List<string> nombresSaga = new List<string>();
+        public static List<string> nombresLibros = new List<string>();
         public static List<GeneroLibro> genLib;
         public static List<AutorLibro> autLib;
 
@@ -49,7 +50,7 @@ namespace OmniBacklog.Paginas
             sagasP.Clear();
             sagasPT.Clear();
             libros.Clear();
-            nombres.Clear();
+            nombresSaga.Clear();
 
             sagasP = bd.SagaRepository.GetAll();
             sagasPT = bd.SagaRepository.GetTree();
@@ -61,10 +62,10 @@ namespace OmniBacklog.Paginas
 
             foreach (Saga saga in sagasP)
             {
-                nombres.Add(saga.Nombre);
+                nombresSaga.Add(saga.Nombre);
                 foreach(Libro libro in saga.Libros)
                 {
-                    nombres.Add(libro.Titulo);
+                    nombresLibros.Add(libro.Titulo);
                 }
             }
             //CBSagas.ItemsSource = sagasP;
@@ -80,17 +81,15 @@ namespace OmniBacklog.Paginas
 
                 if (TVSagaP.SelectedItem.GetType() == libro.GetType())
                 {
-                    CBSagas.ItemsSource = sagasP;
-                    CBSagas.DisplayMemberPath = "Nombre";
-                    CBSagas.SelectedValuePath = "SagaId";
 
                     libro = new Libro();
                     libro = (Libro)TVSagaP.SelectedItem;
-                    gridLibro.DataContext = libro;
+                    //gridLibro.DataContext = libro;
                     TBNombre.IsEnabled = true;
                     TBNombre.Text = libro.Titulo;
+                    TBNum.Value = libro.Numerado;
 
-                    CBSagas.SelectedItem = libro.Saga;
+                    CBSagas.Text = libro.Saga.Nombre;
 
                     LVAutores.IsEnabled = true;
                     LVAutoresT.IsEnabled = true;
@@ -120,15 +119,20 @@ namespace OmniBacklog.Paginas
                     LVAutoresT.ItemsSource = bd.AutorRepository.Get(a => a.AutorId != 1);
                     LVAutoresT.DisplayMemberPath = "Nombre";
                     LVAutoresT.SelectedValuePath = "AutorId";
-
-                    CheckNinguno.IsEnabled = false;
-                    CheckNinguno.IsChecked = false;
                 }
                 else if (TVSagaP.SelectedItem.GetType() == saga.GetType())
                 {
                     saga = new Saga();
                     saga = (Saga)TVSagaP.SelectedItem;
-                    CBSagas.SelectedItem = saga.Saga1;
+                    if(saga.Saga1 != null)
+                    {
+                        CBSagas.Text = saga.Saga1.Nombre;
+                    }
+                    else
+                    {
+                        CBSagas.Text = "";
+                    }
+                    
                     TBNum.Value = saga.Numerado;
                     TBNombre.Text = saga.Nombre;
                     LVAutores.IsEnabled = false;
@@ -137,32 +141,12 @@ namespace OmniBacklog.Paginas
                     LVGenerosT.IsEnabled = false;
 
                     sagasP.Remove(saga);
-                    List<Saga> sagasBorrar = new List<Saga>();
-                    List<Saga> familia = QuitarFamilia(saga.Sagas.ToList(), sagasBorrar);
-
-                    for (int i = 0; i < familia.Count; i++)
-                    {
-                        sagasP.Remove(familia[i]);
-                    }
-
-                    CBSagas.ItemsSource = sagasP;
-                    CBSagas.DisplayMemberPath = "Nombre";
-                    CBSagas.SelectedValuePath = "SagaId";
+                    
 
                     AñadirAu.IsEnabled = false;
                     AñadirGen.IsEnabled = false;
                     QuitarAu.IsEnabled = false;
                     QuitarGen.IsEnabled = false;
-
-                    if (saga.Saga1Id == null)
-                    {
-                        CheckNinguno.IsEnabled = false;
-                        CheckNinguno.IsChecked = false;
-                    }
-                    else
-                    {
-                        CheckNinguno.IsEnabled = true;
-                    }
                 }
             }            
         }
@@ -210,9 +194,9 @@ namespace OmniBacklog.Paginas
                         else
                         {
                             int? sagaId = libro.SagaId;
-                            Saga sagaPadre = (Saga)CBSagas.SelectedItem;
                             libro.Titulo = TBNombre.Text;
-                            libro.SagaId = sagaPadre.SagaId;
+                            libro.Numerado = (int?)TBNum.Value;
+
                             string errores = Validacion.errores(libro);
                             if (errores.Equals(""))
                             {
@@ -238,8 +222,6 @@ namespace OmniBacklog.Paginas
                     }
                     else
                     {
-                        Saga sagaPadre = (Saga)CBSagas.SelectedItem;
-                        int? sagapadreid = null;
                         for (int i = 0; i < sagasP.Count; i++)
                         {
                             if (sagasP[i].Nombre.ToLower().Equals(TBNombre.Text.ToLower()))
@@ -260,37 +242,9 @@ namespace OmniBacklog.Paginas
                             else
                             {
                                 saga.Nombre = TBNombre.Text;
-                                if (CBSagas.SelectedIndex == -1 || sagaPadre.SagaId == saga.SagaId)
-                                {
-                                    sagapadreid = null;
-                                }
-                                else if (CBSagas.SelectedIndex != -1)
-                                {
-                                    sagaPadre = new Saga();
-                                    sagaPadre = (Saga)CBSagas.SelectedItem;
-                                    sagapadreid = sagaPadre.SagaId;
-                                }
-
-                                if (sagapadreid > 2 || sagapadreid == null)
-                                {
-                                    saga.Saga1Id = sagapadreid;
-                                    saga.Numerado = (int?)TBNum.Value;
-                                    bd.SagaRepository.Update(saga);
-                                    bd.Save();
-                                    if (sagapadreid == null)
-                                    {
-                                        sagasPT.Add(saga);
-                                    }
-                                    else
-                                    {
-                                        sagasPT.Remove(saga);
-                                    }
-
-                                }
-                                else
-                                {
-                                    MessageBox.Show("No se puede meter sagas ni en Huérfanos ni en Únicos", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                }
+                                saga.Numerado = (int?)TBNum.Value;
+                                bd.SagaRepository.Update(saga);
+                                bd.Save();
                                 cargar();
                                 TVSagaP.Items.Refresh();
                             }
@@ -306,16 +260,21 @@ namespace OmniBacklog.Paginas
             }
         }
 
+        /*
+        Borrar el botón de borrar seleccionado, quitar la opción de cambiar padre, y simplemente dejar esas dos opciones en la otra ventana
+        Guardar Cambios guardará sólo los cambios individuales del objeto que no afecten a su pasado, presente o futuro padre
+        */
         private void BTNew_Click(object sender, RoutedEventArgs e)
         {
-            TVSagaP.Items.Refresh();
-            nuevo = new LibreriaNLibroSaga(TVSagaP, CBSagas, bd, nombres, Suggestion); //faltan la lista de nombres y el listbox
+            //bd = new UnitOfWork();
+            nuevo = new LibreriaNLibroSaga(TVSagaP, nombresSaga, nombresLibros, Suggestion/*, bd*/); //Voy a borrar la UnitOfWork cada vez que lo cierro a ver qué pasa, si no funca, pues a recomenzar esto
             nuevo.ShowDialog();
         }
 
         private void BTElim_Click(object sender, RoutedEventArgs e) //No funciona si antes añado un elemento nuevo a menos que refresque del todo la página
         {
-            BorrarCosas borrar = new BorrarCosas(TVSagaP, CBSagas, bd);
+            //bd = new UnitOfWork();
+            BorrarCosas borrar = new BorrarCosas(TVSagaP, bd);
             borrar.ShowDialog();
             //if (MessageBox.Show("¡CUIDADO! Al borrar se guarda automáticamente \n ¿Seguro que quieres borrar?", "Borrar", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
             //{
@@ -384,16 +343,7 @@ namespace OmniBacklog.Paginas
             System.Environment.Exit(0);
         }
 
-        private void Quitar(object sender, RoutedEventArgs e)
-        {
-            CBSagas.SelectedIndex = -1;
-            CBSagas.IsEnabled = false;
-        }
-
-        private void Dejar(object sender, RoutedEventArgs e)
-        {
-            CBSagas.IsEnabled = true;
-        }
+        
 
         private void AñadirGen_Click(object sender, RoutedEventArgs e)
         {
@@ -665,69 +615,67 @@ namespace OmniBacklog.Paginas
             
         }
 
-        private void BTBorrarSel_Click(object sender, RoutedEventArgs e)
-        {
-            if (MessageBox.Show("¡CUIDADO! Al borrar se guarda automáticamente \n ¿Seguro que quieres borrar?", "Borrar", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
-            {
-                if (TVSagaP.SelectedItem.GetType() == saga.GetType())
-                {
-                    if (saga.SagaId > 2)
-                    {
-                        foreach (Libro libroH in saga.Libros)
-                        {
-                            libroH.SagaId = 1;
-                        }
+        //private void BTBorrarSel_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (MessageBox.Show("¡CUIDADO! Al borrar se guarda automáticamente \n ¿Seguro que quieres borrar?", "Borrar", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+        //    {
+        //        if (TVSagaP.SelectedItem.GetType() == saga.GetType())
+        //        {
+        //            if (saga.SagaId > 2)
+        //            {
+        //                foreach (Libro libroH in saga.Libros)
+        //                {
+        //                    libroH.SagaId = 1;
+        //                }
 
-                        if (saga.Saga1Id != null && saga.Sagas.Count > 0)
-                        {
-                            if (MessageBox.Show("¿Quieres que las sagas hijas se vuelvan principales?", "Sagas hijas", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
-                            {
-                                foreach (Saga sagaH in saga.Sagas)
-                                {
-                                    sagasPT.Add(sagaH);
-                                }
-                            }
-                            else
-                            {
-                                foreach (Saga sagaH in saga.Sagas)
-                                {
-                                    sagaH.Saga1Id = saga.Saga1Id;
-                                }
-                            }
-                        }
-                        else if (saga.Sagas.Count > 0 && saga.Saga1Id == null)
-                        {
-                            foreach (Saga sagaH in saga.Sagas)
-                            {
-                                sagasPT.Add(sagaH);
-                            }
-                        }
+        //                if (saga.Saga1Id != null && saga.Sagas.Count > 0)
+        //                {
+        //                    if (MessageBox.Show("¿Quieres que las sagas hijas se vuelvan principales?", "Sagas hijas", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+        //                    {
+        //                        foreach (Saga sagaH in saga.Sagas)
+        //                        {
+        //                            sagasPT.Add(sagaH);
+        //                        }
+        //                    }
+        //                    else
+        //                    {
+        //                        foreach (Saga sagaH in saga.Sagas)
+        //                        {
+        //                            sagaH.Saga1Id = saga.Saga1Id;
+        //                        }
+        //                    }
+        //                }
+        //                else if (saga.Sagas.Count > 0 && saga.Saga1Id == null)
+        //                {
+        //                    foreach (Saga sagaH in saga.Sagas)
+        //                    {
+        //                        sagasPT.Add(sagaH);
+        //                    }
+        //                }
 
-                        sagasPT.Remove(saga);
-                        sagasP.Remove(saga);
+        //                sagasPT.Remove(saga);
+        //                sagasP.Remove(saga);
 
-                        bd.SagaRepository.Delete(saga);
+        //                bd.SagaRepository.Delete(saga);
 
-                        bd.Save();
+        //                bd.Save();
 
-                        TVSagaP.Items.Refresh();
-                        CBSagas.Items.Refresh();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se puede borrar ni Huérfanos ni Únicos", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    CBSagas.Items.Refresh();
+        //                TVSagaP.Items.Refresh();
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("No se puede borrar ni Huérfanos ni Únicos", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //            }
 
-                }
-                else if (TVSagaP.SelectedItem.GetType() == libro.GetType())
-                {
-                    bd.LibroRepository.Delete(libro);
-                    bd.Save();
-                    TVSagaP.Items.Refresh();
-                }
-            }       
-        }
+        //        }
+        //        else if (TVSagaP.SelectedItem.GetType() == libro.GetType())
+        //        {
+        //            bd.LibroRepository.Delete(libro);
+        //            bd.Save();
+        //            TVSagaP.Items.Refresh();
+        //        }
+        //    }       
+        //}
 
         private void Suggestion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -746,18 +694,37 @@ namespace OmniBacklog.Paginas
         {
             string typedString = TBNombreBuscar.Text;
             List<string> autoList = new List<string>();
-            autoList.Clear();
+            
 
-            foreach (string item in nombres)
+            if(RBSaga.IsChecked == true)
             {
-                if (!string.IsNullOrEmpty(TBNombreBuscar.Text))
+                autoList.Clear();
+                foreach (string item in nombresSaga)
                 {
-                    if (item.ToLower().Contains(typedString.ToLower()))
+                    if (!string.IsNullOrEmpty(TBNombreBuscar.Text))
                     {
-                        autoList.Add(item);
+                        if (item.ToLower().Contains(typedString.ToLower()))
+                        {
+                            autoList.Add(item);
+                        }
                     }
                 }
             }
+            else if(RBLibro.IsChecked == true)
+            {
+                autoList.Clear();
+                foreach (string item in nombresLibros)
+                {
+                    if (!string.IsNullOrEmpty(TBNombreBuscar.Text))
+                    {
+                        if (item.ToLower().Contains(typedString.ToLower()))
+                        {
+                            autoList.Add(item);
+                        }
+                    }
+                }
+            }
+            
 
             if (autoList.Count > 0)
             {
@@ -774,6 +741,26 @@ namespace OmniBacklog.Paginas
             {
                 Suggestion.Visibility = Visibility.Collapsed;
                 Suggestion.ItemsSource = null;
+            }
+        }
+
+        private void UnselectTreeViewItem()
+        {
+            if (TVSagaP.SelectedItem == null)
+                return;
+
+            if (TVSagaP.SelectedItem is TreeViewItem)
+            {
+                (TVSagaP.SelectedItem as TreeViewItem).IsSelected = false;
+            }
+            else
+            {
+                TreeViewItem item = TVSagaP.ItemContainerGenerator.ContainerFromIndex(0) as TreeViewItem;
+                if (item != null)
+                {
+                    item.IsSelected = true;
+                    item.IsSelected = false;
+                }
             }
         }
     }

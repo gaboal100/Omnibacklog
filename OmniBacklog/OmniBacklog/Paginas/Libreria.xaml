@@ -104,7 +104,7 @@
                 </Button>
 
             <Button x:Name="BTElim" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,20,20,20" Grid.Column="2" FontSize="16" Click="BTElim_Click">
-                 Eliminar y mover en masa
+                 Eliminar y mover
             </Button>
         </Grid>
 
@@ -117,9 +117,8 @@
                 
                 <Label FontWeight="Bold" Background="#E7E9EC" Width="300">Saga padre</Label>
                 <StackPanel Orientation="Horizontal" Margin="10,0,10,0" Width="300">
-                    <ComboBox Name="CBSagas"  Margin="0,0,0,0" SelectedValue="{Binding Path=SagaId, Mode=TwoWay}" Width="200" SelectionChanged="CBSagas_SelectionChanged">
-                    </ComboBox>
-                    <CheckBox x:Name="CheckNinguno" Checked="Quitar" Unchecked="Dejar" Margin="10,0,0,0">Quitar</CheckBox>
+                    <TextBlock Name="CBSagas"  Margin="0,0,0,0" Text="{Binding Path=SagaId, Mode=TwoWay}" IsEnabled="False" Background="White" Width="300">
+                    </TextBlock>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Width="300">
@@ -179,12 +178,8 @@
                     <ListView Grid.Row="1" Grid.Column="2" x:Name="LVAutores" SelectedValue="{Binding AutorId}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="140" Height="210" SelectionMode="Multiple"></ListView>
                 </Grid>
 
-                <Button x:Name="BTModificar" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,20,20,0" Grid.Column="1" FontSize="13" Click="BTModificar_Click">
+                <Button x:Name="BTModificar" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,50,20,0" Grid.Column="1" FontSize="13" Click="BTModificar_Click">
                      Guardar cambios
-                </Button>
-
-                <Button x:Name="BTBorrarSel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="70,10,70,0" Grid.Column="1" FontSize="13" Click="BTBorrarSel_Click">
-                     Borrar seleccionado
                 </Button>
             </StackPanel>
             
